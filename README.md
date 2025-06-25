@@ -4,31 +4,39 @@ Overview
 
 This solution optimizes costs for a serverless Azure Cosmos DB database storing billing records by implementing a tiered storage approach: recent records (<3 months) remain in Cosmos DB, while older records (>3 months) are archived to Azure Blob Storage. Azure Functions handle archival and retrieval, ensuring no data loss, downtime, or API changes.
 
-Architecture:
+Implementation
 
-Client Application
-         |
-         v
-[API Layer (Azure API Management or App Service)]
-         |
-         v
-[Azure Cosmos DB (Hot Tier: <3 months)]
-         |                    ^
-         v                    |
-[Azure Function: Archival]   [Azure Function: Retrieval]
-         |                    |
-         v                    |
-[Azure Blob Storage (Cold Tier: >3 months)]
-         |
-         v
-[Azure Monitor + Cost Management]
+1. Configure Cosmos DB:
 
-# Azure Cosmos DB Cost Optimization Challenge
+Enable TTL (90 days) on records.
+Use serverless mode.
+Command:
+az cosmosdb update --name <cosmos-account> --resource-group <rg> --default-ttl 7776000
 
-This repository contains a solution for optimizing costs in a serverless Azure Cosmos DB database storing billing records. The solution uses a tiered storage approach with Azure Blob Storage for archival and Azure Functions for automation.
+2. Set Up Blob Storage:
+Create a Cool tier container.
 
-## Contents
-- `solution.md`: Detailed solution with architecture, pseudocode, and commands.
-- `scripts/`: Python scripts for Azure Functions.
-- `architecture.drawio`: Architecture diagram.
+Command:
+az storage container create --name billing-archive --account-name <storage-account> --access-tier Cool
 
+3. Archival Function:
+Trigger: Daily timer.
+
+Logic:
+Query records older than 90 days.
+Copy to Blob Storage.
+Mark as archived in Cosmos DB (optional metadata).
+
+4. Retrieval Function:
+
+Trigger: HTTP or Cosmos DB read request.
+Logic:
+Check Cosmos DB.
+If not found, fetch from Blob Storage.
+
+5. Monitoring:
+Set up Azure Monitor for logs.
+Create cost alerts in Azure Cost Management.
+
+Command:
+az monitor alert create --name cost-alert --resource-group <rg> --condition "total cost > 100" --action email --email-address admin@company.com
