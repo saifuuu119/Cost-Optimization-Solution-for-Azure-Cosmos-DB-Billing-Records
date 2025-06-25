@@ -11,13 +11,13 @@ Implementation
 Enable TTL (90 days) on records.
 Use serverless mode.
 Command:
-az cosmosdb update --name <cosmos-account> --resource-group <rg> --default-ttl 7776000
+az cosmosdb update \--name MyCosmosAccount \--resource-group MyResourceGroup \--default-ttl 7776000 \--server-version 3.2 \--enable-serverless true
 
 2. Set Up Blob Storage:
 Create a Cool tier container.
 
 Command:
-az storage container create --name billing-archive --account-name <storage-account> --access-tier Cool
+az storage container create \--name billing-archive \--account-name mystorageaccount \--access-tier Cool
 
 3. Archival Function:
 Trigger: Daily timer.
