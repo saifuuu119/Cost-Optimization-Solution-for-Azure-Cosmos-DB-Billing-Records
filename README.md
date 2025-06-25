@@ -23,7 +23,17 @@ Client Application
          v
 [Azure Monitor + Cost Management]
 
-*Implementation
-1. Configure Cosmos DB
-Enable TTL (90 days) on records.
-Use serverless mode.
+# Azure Cosmos DB Cost Optimization Challenge
+
+This repository contains a solution for optimizing costs in a serverless Azure Cosmos DB database storing billing records. The solution uses a tiered storage approach with Azure Blob Storage for archival and Azure Functions for automation.
+
+## Contents
+- `solution.md`: Detailed solution with architecture, pseudocode, and commands.
+- `scripts/`: Python scripts for Azure Functions.
+- `architecture.drawio`: Architecture diagram.
+
+## Conversation
+The solution was developed with assistance from Grok 3 (xAI). The conversation is included in `solution.md`.
+
+## License
+MIT
