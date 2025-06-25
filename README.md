@@ -1,0 +1,1 @@
+# Cost-Optimization-Solution-for-Azure-Cosmos-DB-Billing-Records
