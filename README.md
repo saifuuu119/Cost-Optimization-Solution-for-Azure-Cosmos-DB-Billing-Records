@@ -29,14 +29,24 @@ Mark as archived in Cosmos DB (optional metadata).
 
 4. Retrieval Function:
 
-Trigger: HTTP or Cosmos DB read request.
+Objective: Handle retrieval requests, checking Cosmos DB first and fetching from Blob Storage if the record is not found.
+
+Trigger: HTTP trigger or Cosmos DB change feed trigger for read requests.
 Logic:
-Check Cosmos DB.
-If not found, fetch from Blob Storage.
+Attempt to read from Cosmos DB.
+If not found, fetch from Blob Storage based on the record ID and timestamp-derived path.
+Command to Deploy Function:
+
+bash cammand:
+az functionapp deployment source config-zip \--name MyRetrievalFunction \--resource-group MyResourceGroup \--src retrieval-function.zip
 
 5. Monitoring:
 Set up Azure Monitor for logs.
 Create cost alerts in Azure Cost Management.
 
 Command:
-az monitor alert create --name cost-alert --resource-group <rg> --condition "total cost > 100" --action email --email-address admin@company.com
+az monitor alert create --name cost-alert --resource-group <rg> --condition "total cost > 100" --action email --email-address sayedsaif9520@gmail.com
+
+Create Cost Alert:
+bash cammand:
+az monitor alert create \--name CostAlertForBilling \--resource-group MyResourceGroup \--scopes /subscriptions/<subscription-id>/resourceGroups/MyResourceGroup \--condition "total cost > 100" \--action "email admin@company.com" \ --description "Alert when monthly cost exceeds $100"
