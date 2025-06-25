@@ -49,4 +49,4 @@ az monitor alert create --name cost-alert --resource-group <rg> --condition "tot
 
 Create Cost Alert:
 bash cammand:
-az monitor alert create \--name CostAlertForBilling \--resource-group MyResourceGroup \--scopes /subscriptions/<subscription-id>/resourceGroups/MyResourceGroup \--condition "total cost > 100" \--action "email admin@company.com" \ --description "Alert when monthly cost exceeds $100"
+az monitor alert create \--name CostAlertForBilling \--resource-group MyResourceGroup \--scopes /subscriptions/<subscription-id>/resourceGroups/MyResourceGroup \--condition "total cost > 100" \--action "email sayedsaif9520@gmail.com" \ --description "Alert when monthly cost exceeds $100"
