@@ -32,8 +32,3 @@ This repository contains a solution for optimizing costs in a serverless Azure C
 - `scripts/`: Python scripts for Azure Functions.
 - `architecture.drawio`: Architecture diagram.
 
-## Conversation
-The solution was developed with assistance from Grok 3 (xAI). The conversation is included in `solution.md`.
-
-## License
-MIT
