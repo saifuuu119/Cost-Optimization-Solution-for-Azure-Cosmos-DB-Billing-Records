@@ -1,0 +1,16 @@
+[Client Application]
+         |
+         v
+[API Layer (Azure API Management or App Service)]
+         |
+         v
+[Azure Cosmos DB (Hot Tier: <3 months)]
+         |                    ^
+         v                    |
+[Azure Function: Archival]   [Azure Function: Retrieval]
+         |                    |
+         v                    |
+[Azure Blob Storage (Cold Tier: >3 months)]
+         |
+         v
+[Azure Monitor + Cost Management]
